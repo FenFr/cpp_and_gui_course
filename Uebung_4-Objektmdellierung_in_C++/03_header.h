@@ -17,14 +17,11 @@ class CBUF {
         char *buf;        
     
     public:
-         CBUF(int len, int size, char *buf);        // constructor
-        ~CBUF();                                    // deconstructor
+         CBUF();                                // constructor
+        ~CBUF();                                // deconstructor
         
-        CBUF     cbuf_malloc();             // new CBUF
-        void     cbuf_free();               // free
-        
-        CBUF    *cbuf_reset ();             // clear the content
-        char    *cbuf_addc  (char c);       // add one char
-        char    *cbuf_addstr(char *s);      // add a string
-        char    *cbuf_read  ();             // get the content
+        void     cbuf_reset ();                 // clear the content
+        char    *cbuf_addc  (char c);           // add one char
+        char    *cbuf_addstr(const char *s);    // add a string
+        char    *cbuf_buf   ();                 // get the content
 };

@@ -11,35 +11,56 @@
 
 
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "03_header.h"
 
 #define INCR 128
 
-using namespace std;
 
+static void test_memory(void *p, const char *fname) {
+    if(!p) {
+        printf("%s: out of memory\n", fname);
+        exit(1);
+    }    
+}
 
-CBUF :: CBUF(int len, int size, char *buf) {
-    this->len = len;
-    this->size = size;
-    buf = new char[size];
+CBUF :: CBUF() {
+    test_memory(buf = new char[size = INCR], "CBUF");
+    this->cbuf_reset();
 }
 
 CBUF :: ~CBUF() {
-    delete [] buf;
+    delete this->buf;
 }
 
-CBUF CBUF :: *cbuf_reset () {
+void CBUF :: cbuf_reset() {
     this->buf[this->len = 0] = '\0';
-    return(this);
 }
 
-static void *new_memory(int size, char *name) {
-    void *p;
-    if (!(p = malloc(size))) {
-        cout << "Error: Memory allocation failed!";
-        exit(1);
+char *CBUF :: cbuf_buf() {
+    return this->buf;
+}
+
+char *CBUF :: cbuf_addc(char c) {
+    if( this->len + 1 >= this->size ) {
+        char *new_buf = new char[this->size + INCR];
+        test_memory(new_buf, "CBUF :: cb_addc()");
+        memcpy(new_buf, buf, len+1);
+        delete buf;
+        size += INCR;
+        buf = new_buf;
     }
+    buf[len++] = c;
+    buf[len]   = '\0';
     
-    return p;
+    return this->buf;
+}
+
+char *CBUF :: cbuf_addstr(const char *s) {
+    while(*s)
+        this->cbuf_addc(*s++);
+    
+    return this->buf;
 }
