@@ -1,11 +1,13 @@
-my_program:	main.o header_code.o header.o
-			gcc -o my_program main.o header_code.o header.o
+#my_programm:	gcc 03_main.c 04_header_code.c 05_header.h -o my_programm
 
-main.o:			03_main.c
-				gcc -c 03_main.c
+my_programm: 	main header-code header
+				gcc main header-code header -o my_programm
 
-header_code.o:	04_header-code.c
-				gcc -c 04_header-code.c
+main: 			03_main.c
+				gcc 03_main.c -o main
 
-header.o:		05_header.h
-				gcc -c 05_header.h
+header-code:	04_header-code.c
+				gcc 04_header_code.c -o header-code
+
+header:			05_header.h
+				gcc 05_header.h -o header
