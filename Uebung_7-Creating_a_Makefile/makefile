@@ -1,5 +1,3 @@
-#my_programm:	gcc 03_main.c 04_header_code.c 05_header.h -o my_programm
-
 my_programm: 	main header-code header
 				gcc main header-code header -o my_programm
 

@@ -21,33 +21,36 @@ class TL {
         const char *light;
         int phase;
 
+        void change_light ();
+
     public:
         TL();
         TL(int phase_in);
 //       ~TL();
 
-        void change_light (int phase_in);
         void iterate_light();
         void print_light  ();
 };
 
 
-TL :: TL() {
-    change_light(this->phase = 1);
+TL :: TL() 
+    : phase(1) {
+
+    change_light();
     print_light ();
 }
 
 
-TL :: TL(int phase_in) {
-    change_light(this->phase = phase_in);
+TL :: TL(int phase_in) 
+    : phase(phase_in) {
+        
+    change_light();
     print_light ();
 }
 
 
-void TL :: change_light(int phase_in) {
+void TL :: change_light() {
     
-    this->phase = phase_in;
-
     switch(this->phase) {
         default :   this->phase = 1;
 
@@ -61,12 +64,14 @@ void TL :: change_light(int phase_in) {
                     break;
 
         case  4 :   this->light = "_ Y _";
+                    break;
     }
 }
 
 
 void TL :: iterate_light() {
-    change_light(++this->phase);
+    this->phase++;
+    change_light();
     print_light ();
 }
 
