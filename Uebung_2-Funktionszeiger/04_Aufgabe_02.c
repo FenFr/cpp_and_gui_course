@@ -2,7 +2,7 @@
 // Course:	  			C++ / GUI
 // Lecturer:      		Prof. Dr.-Ing. habil. Ralf Salomon
 // Exercise instructor: M.Sc. Theo Gabloffsky
-// Author:              Fenja Freitag
+// Author:              Fenya Freitag
 // Exercise:      		2
 // Task:          		2
 // Name:          		04_Aufgabe_02.c
