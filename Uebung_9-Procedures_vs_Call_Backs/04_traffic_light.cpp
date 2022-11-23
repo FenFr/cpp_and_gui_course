@@ -2,7 +2,7 @@
 // Course:	  			C++ / GUI
 // Lecturer:      		Prof. Dr.-Ing. habil. Ralf Salomon
 // Exercise instructor: M.Sc. Theo Gabloffsky
-// Author:              Fenja Freitag
+// Author:              Fenya Freitag
 // Exercise:      		9
 // Task:          		3
 // Name:          		04_traffic_light.c
@@ -19,7 +19,7 @@
 class TL {
     private:
         const char *light;
-        int   phase;
+        int phase;
 
     public:
         TL();
@@ -46,9 +46,11 @@ TL :: TL(int phase_in) {
 
 void TL :: change_light(int phase_in) {
     
-    this->phase = (phase_in > 4) ? 1 : phase_in;
+    this->phase = phase_in;
 
     switch(this->phase) {
+        default :   this->phase = 1;
+
         case  1 :   this->light = "R _ _";
                     break;
 
@@ -58,7 +60,7 @@ void TL :: change_light(int phase_in) {
         case  3 :   this->light = "_ _ G";
                     break;
 
-        default :   this->light = "_ Y _";
+        case  4 :   this->light = "_ Y _";
     }
 }
 
@@ -78,7 +80,7 @@ void TL :: print_light() {
 
 int main(int argc, char**argv) {
 
-    TL tl(1);
+    TL tl;
     
     for(int i = 3*4-1; 0 < i; i--){
         tl.iterate_light();
