@@ -33,17 +33,15 @@ class TL {
 };
 
 
-TL :: TL() 
-    : phase(1) {
-
+TL :: TL() {
+    this->phase = 1;
     change_light();
     print_light ();
 }
 
 
-TL :: TL(int phase_in) 
-    : phase(phase_in) {
-        
+TL :: TL(int phase_in) {
+    this->phase = phase_in;        
     change_light();
     print_light ();
 }
