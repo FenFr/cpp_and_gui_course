@@ -19,7 +19,7 @@
 class TL {
     private:
         const char *light;
-        int phase;
+        short int phase;
 
         void change_light ();
 
