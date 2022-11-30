@@ -12,6 +12,8 @@
 
 #include <QApplication>
 #include <QPushButton>
+#include <QWidget>
+#include <QFont>
 
 
 // MAIN //////////////////////////////////////////////////////////////////////
@@ -20,14 +22,23 @@ int main(int argc, char**argv) {
 
     QApplication app(argc, argv);
 
-    QPushButton quit("Quit");
-    quit.resize(75, 30);
+    QWidget window;
+    window.resize(200, 120);
+
+    QPushButton quit("Quit", &window);
     quit.setFont(QFont("Times", 18, QFont::Bold));
+    quit.setGeometry(10, 40, 180, 40);
+    quit.setVisible(false);
 
-    QPushButton hello("Hello world!");
-    hello.resize(100, 30);
+    QPushButton hello("Hello world!", &window);
+    hello.setFont(QFont("Times", 18, QFont::Bold));
+    hello.setGeometry(10, 40, 180, 40);
 
-    hello.show();
+    QObject::connect(&hello, SIGNAL(clicked()), &quit,  SLOT(show()));
+    QObject::connect(&hello, SIGNAL(clicked()), &hello, SLOT(hide()));
+    QObject::connect(&quit, SIGNAL(clicked()), &app, SLOT(quit()));
+
+    window.show();
     return app.exec();
 
 
