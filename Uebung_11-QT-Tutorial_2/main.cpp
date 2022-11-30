@@ -1,0 +1,28 @@
+//////////////////////////////////////////////////////////////////////////////
+// Course:	  			C++ / GUI
+// Lecturer:      		Prof. Dr.-Ing. habil. Ralf Salomon
+// Exercise instructor: M.Sc. Theo Gabloffsky
+// Author:              Fenya Freitag
+// Exercise:      		11
+// Task:          		1
+// Name:          		main.cpp
+// Description:   		
+//////////////////////////////////////////////////////////////////////////////
+
+
+#include <QApplication>
+#include <QPushButton>
+#include <QWidget>
+#include <QFont>
+
+
+// MAIN //////////////////////////////////////////////////////////////////////
+
+int main(int argc, char**argv) {
+
+    QApplication app(argc, argv);
+
+}
+
+
+// MAIN END //////////////////////////////////////////////////////////////////
