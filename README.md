@@ -1,5 +1,15 @@
-# ccp_and_gui_courese
-This is my private Repository for the C++ / GUI course at my University.
+<div align = "center">
+    <h1> C++ / GUI </h1>
+    <h3> This is my Repository for the C++ / GUI course at my University. </h3>
+</div>
+
+&nbsp;
+
+<div align = "center">
+
+![Code Size][code-size-img] &nbsp; ![Code File Size][code-file-img] &nbsp; ![Lines of Code][code-lines-img]
+
+</div>
 
 ## QMake
 
@@ -22,3 +32,9 @@ QT += widgets
 $ qmake
 $ make
 ```
+
+<!-- Link anchors -->
+
+[code-size-img]:    https://img.shields.io/github/languages/code-size/FenFr/cpp_and_gui_course?label=Code%20Size&style=flat-square
+[code-file-img]:    https://img.shields.io/github/directory-file-count/fenfr/cpp_and_gui_course?label=Files&style=flat-square
+[code-lines-img]:   https://img.shields.io/tokei/lines/github/fenfr/cpp_and_gui_course?label=Lines%20of%20Code&style=flat-square
