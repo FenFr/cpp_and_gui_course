@@ -7,7 +7,7 @@
 
 <div align = "center">
 
-![Code Size][code-size-img] &nbsp; ![Code File Size][code-file-img] &nbsp; ![Lines of Code][code-lines-img]
+![Repository Size][rep-size-img] &nbsp; ![Code Size][code-size-img] &nbsp; ![Code File Size][code-file-img] &nbsp; ![Lines of Code][code-lines-img]
 
 </div>
 
@@ -38,3 +38,4 @@ $ make
 [code-size-img]:    https://img.shields.io/github/languages/code-size/FenFr/cpp_and_gui_course?label=Code%20Size&style=flat-square
 [code-file-img]:    https://img.shields.io/github/directory-file-count/fenfr/cpp_and_gui_course?label=Files&style=flat-square
 [code-lines-img]:   https://img.shields.io/tokei/lines/github/fenfr/cpp_and_gui_course?label=Lines%20of%20Code&style=flat-square
+[rep-size-img]:     https://img.shields.io/github/repo-size/FenFr/cpp_and_gui_course?label=Repo%20Size&style=flat-square
