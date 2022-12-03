@@ -29,8 +29,7 @@ QT += widgets
 
 **Compiling your code**
 ```
-$ qmake
-$ make
+$ qmake && make
 ```
 
 <!-- Link anchors -->
