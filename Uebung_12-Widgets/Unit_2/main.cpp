@@ -19,47 +19,7 @@
 #include <QWidget>
 #include <QSpinBox>
 
-// Muss in eine Header-File
-class ClickChange : public QWidget {
-    Q_OBJECT
-
-    public:
-        ClickChange(int ini_val, QWidget *parent = 0);
-
-        int value;
-
-    public slots:
-
-        void setValue( int val_in );
-        void incValue( void );
-        void decValue( void );
-
-    signals:
-        int newValue( void );
-};
-
-
-ClickChange::ClickChange(int ini_val, QWidget *parent)
-    : QWidget(parent) {
-    this->value = ini_val;
-}
-
-void ClickChange::setValue(int val_in) {
-    this->value = val_in;
-}
-
-void ClickChange::incValue( void ) {
-    this->value++;
-}
-
-void ClickChange::decValue( void ) {
-    this->value--;
-}
-
-int ClickChange::newValue( void ) {
-    return this->value;
-}
-
+#include "header.h"
 
 
 class MyWidget : public QWidget {
@@ -67,43 +27,26 @@ class MyWidget : public QWidget {
         MyWidget(QWidget *parent = 0);
 };
 
-
 MyWidget::MyWidget(QWidget *parent)
     : QWidget(parent) {
-
-    setFixedSize(400,200);
 
     QPushButton *quit = new QPushButton(tr("Quit"));
     quit->setFont(QFont("Times", 18, QFont::Bold));
 
     QLCDNumber *lcd = new QLCDNumber(3);
     lcd->setSegmentStyle(QLCDNumber::Filled);
-    lcd->display(10);
 
-    QSlider *slider = new QSlider(Qt::Horizontal);
-    slider->setRange(0, 420);
-    slider->setValue(10);
-
-    QPushButton *b_left  = new QPushButton("-");
-
-    QPushButton *b_right = new QPushButton("+");
-
-    ClickChange *val = new ClickChange(10);
+    // FancySlider is contained in h-code.cpp and header.h
+    FancySlider *fs = new FancySlider();
 
     connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
 
-    connect(slider, SIGNAL(valueChanged(int)), val , SLOT(setValue(int)));
-    connect(val   , SIGNAL(newValue())       , lcd , SLOT(setValue(int)));
-/*
-    connect(slider , SIGNAL(valueChanged(int)), lcd , SLOT(display(int)));
-    connect(b_left , SIGNAL(clicked())        , lcd , SLOT(setValue(int)));
-    connect(b_right, SIGNAL(clicked())        , lcd , SLOT(setValue(int)));
-*/
+    connect(fs, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
+
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(quit);
     layout->addWidget(lcd);
-    layout->addWidget(slider);
-    layout->addWidget(b_left);
+    layout->addWidget(fs);
     setLayout(layout);
 }
 

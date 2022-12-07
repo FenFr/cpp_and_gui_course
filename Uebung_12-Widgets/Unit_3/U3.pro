@@ -1,7 +1,7 @@
 TEMPLATE	= app
 CONFIG     += qt warn_on
-HEADERS	    =
-SOURCES	    = main.cpp
+HEADERS	    = header.h
+SOURCES	    = main.cpp h-code.cpp
 TARGET		= U3
 QTDIR_build:REQUIRES="contains(QT_CONFIG, small-config)"
 
