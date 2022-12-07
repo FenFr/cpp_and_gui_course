@@ -19,24 +19,24 @@ class QPushButton;
 class QLCDNumber;
 
 
-class MyClass : public QWidget {
+class LEDBlock : public QWidget {
     Q_OBJECT
 
     public:
-        MyClass(QWidget *parent = 0);
+        LEDBlock(QWidget *parent = 0);
 
     private:
         QLCDNumber  *lcd;
         QPushButton *button;
 
     public slots:
+        void LEDon();
+        void LEDoff();
 
-    
     private slots:
 
-
     signals:
-
+        void clicked();
 };
 
 #endif
