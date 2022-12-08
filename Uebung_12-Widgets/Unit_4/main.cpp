@@ -11,9 +11,13 @@
 
 
 #include <QApplication>
+#include <QHBoxLayout>
 #include <QPushButton>
+#include <QPalette>
 #include <QWidget>
-#include <QFont>
+#include <vector>
+
+#include "header.h"
 
 
 class MyWidget : public QWidget {
@@ -24,8 +28,28 @@ class MyWidget : public QWidget {
 
 MyWidget::MyWidget(QWidget *parent)
     : QWidget(parent) {
+
+    QPushButton *quit = new QPushButton("Quit");
     
-    
+    cSlider *rSlider = new cSlider("R");
+    cSlider *gSlider = new cSlider("G");
+    cSlider *bSlider = new cSlider("B");
+
+    adjustPalette *palette = new adjustPalette();
+
+    connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
+
+    connect(rSlider, SIGNAL(colorValue(int)), palette, SLOT(setRvalue(int)));
+    connect(gSlider, SIGNAL(colorValue(int)), palette, SLOT(setGvalue(int)));
+    connect(bSlider, SIGNAL(colorValue(int)), palette, SLOT(setBvalue(int)));
+
+    QVBoxLayout *box = new QVBoxLayout;
+    box->addWidget(quit);
+    box->addWidget(rSlider);
+    box->addWidget(gSlider);
+    box->addWidget(bSlider);
+    box->addWidget(palette);
+    setLayout(box);
 }
 
 
@@ -35,7 +59,8 @@ int main(int argc, char**argv) {
 
     QApplication app(argc, argv);
 
-
+    MyWidget widget;
+    widget.show();
 
     return app.exec();
 }
