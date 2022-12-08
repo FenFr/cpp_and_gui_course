@@ -26,17 +26,24 @@ class LEDBlock : public QWidget {
         LEDBlock(QWidget *parent = 0);
 
     private:
+        int LEDstate = 0;
         QLCDNumber  *lcd;
         QPushButton *button;
 
     public slots:
         void LEDon();
         void LEDoff();
+        void setValue(int value);
+        void initLogic();
+        void binLogic();
 
     private slots:
-
+        
     signals:
         void clicked();
+        void tick();
+        void valueChanged(int newValue);
+        void valueClicked(int value);
 };
 
 #endif

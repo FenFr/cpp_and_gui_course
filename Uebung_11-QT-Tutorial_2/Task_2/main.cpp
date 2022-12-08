@@ -52,6 +52,8 @@ MyWidget::MyWidget(QWidget *parent)
     layout->addWidget(slider);
     layout->addWidget(spinner);
     setLayout(layout);
+
+    if()
 }
 
 

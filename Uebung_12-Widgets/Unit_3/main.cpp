@@ -20,6 +20,8 @@
 
 #include "header.h"
 
+#define MODUS 3
+
 
 class MyWidget : public QWidget {
     public:
@@ -41,19 +43,54 @@ MyWidget::MyWidget(QWidget *parent)
         menu->addAction("Mode 2");
         menu->addAction("Mode 3");
 
-    QPushButton *mode = new QPushButton(tr("Mode 1"));
+    QPushButton *mode = new QPushButton(tr("Mode"));
         mode->setMenu(menu);
 
     connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
-    
-    connect(l_block, SIGNAL(clicked()), m_block, SLOT(LEDoff()));
-    connect(l_block, SIGNAL(clicked()), r_block, SLOT(LEDoff()));
 
-    connect(m_block, SIGNAL(clicked()), l_block, SLOT(LEDoff()));
-    connect(m_block, SIGNAL(clicked()), r_block, SLOT(LEDoff()));
 
-    connect(r_block, SIGNAL(clicked()), l_block, SLOT(LEDoff()));
-    connect(r_block, SIGNAL(clicked()), m_block, SLOT(LEDoff()));
+switch(MODUS) {
+    case 1  :   connect(l_block, SIGNAL(clicked()), l_block, SLOT(LEDon()));
+                connect(l_block, SIGNAL(clicked()), m_block, SLOT(LEDoff()));
+                connect(l_block, SIGNAL(clicked()), r_block, SLOT(LEDoff()));
+
+                connect(m_block, SIGNAL(clicked()), l_block, SLOT(LEDoff()));
+                connect(m_block, SIGNAL(clicked()), m_block, SLOT(LEDon()));
+                connect(m_block, SIGNAL(clicked()), r_block, SLOT(LEDoff()));
+
+                connect(r_block, SIGNAL(clicked()), l_block, SLOT(LEDoff()));
+                connect(r_block, SIGNAL(clicked()), m_block, SLOT(LEDoff()));
+                connect(r_block, SIGNAL(clicked()), r_block, SLOT(LEDon()));
+                break;
+
+
+    case 2  :   l_block->LEDon();
+                connect(l_block, SIGNAL(clicked()), l_block, SLOT(initLogic()));
+                connect(m_block, SIGNAL(clicked()), l_block, SLOT(initLogic()));
+                connect(r_block, SIGNAL(clicked()), l_block, SLOT(initLogic()));
+
+                connect(l_block, SIGNAL(tick()), m_block, SLOT(initLogic()));
+                connect(m_block, SIGNAL(tick()), r_block, SLOT(initLogic()));
+
+                connect(l_block, SIGNAL(valueClicked(int)), m_block, SLOT(setValue(int)));
+                connect(m_block, SIGNAL(valueClicked(int)), r_block, SLOT(setValue(int)));
+                connect(r_block, SIGNAL(valueClicked(int)), l_block, SLOT(setValue(int)));
+                break; 
+
+
+    case 3  :   connect(l_block, SIGNAL(clicked()), r_block, SLOT(binLogic()));
+                connect(m_block, SIGNAL(clicked()), r_block, SLOT(binLogic()));
+                connect(r_block, SIGNAL(clicked()), r_block, SLOT(binLogic()));
+
+                connect(r_block, SIGNAL(tick()), m_block, SLOT(binLogic()));
+                connect(m_block, SIGNAL(tick()), l_block, SLOT(binLogic()));
+                break;
+
+
+    default :   printf("Error: must be case 1, 2 or 3");
+                exit(1);
+}
+
 
     QGridLayout *grid = new QGridLayout;
     grid->addWidget(mode,    0, 0);
