@@ -44,7 +44,7 @@ class MyClass : public QWidget {
 
     signals:
         void a_signal();                // ein Signal, um die Klasse mit anderen Widgets, etc. zu connecten
-        void valueChanged(int value);   // nicht alle Signale und Slots müssen später beschrieben werden
+        void valueChanged(int value);   // Signale können und dürfen nicht weiter beschrieben werden
 };
 
 #endif
@@ -95,10 +95,6 @@ MyClass::MyClass(QWidget *parent)
 
 void MyClass :: a_function() {
     slider->setValue(slider->value() + 1);
-}
-
-void MyClass :: a_signal() {
-    // something, I'm too lazy rn
 }
 ```
 
