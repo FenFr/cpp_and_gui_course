@@ -90,6 +90,8 @@ MyClass::MyClass(QWidget *parent)
 
 
  int MyClass :: a_slot() {
+    // wenn a_slot() ausgeführt wird, wird das Signal a_signal() ausgeführt und slider->value zurück gegeben
+    emit a_signal();
     return slider->value;
 }
 
