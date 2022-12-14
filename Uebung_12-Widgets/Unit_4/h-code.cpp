@@ -15,9 +15,11 @@
 #include <QWidget>
 #include <QSlider>
 #include <QPalette>
+#include <QPainter>
 #include <QLCDNumber>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QPaintDevice>
 
 #include "header.h"
 
@@ -58,46 +60,43 @@ void cSlider :: pushButton() {
 
 
 
-adjustPalette :: adjustPalette(QWidget *parent)
+colorDemo :: colorDemo(QWidget *parent)
     : QWidget(parent) {
-
     rValue = 0;
     gValue = 0;
     bValue = 0;
-
-    colorBox = new QLabel();
-        colorBox->setFrameStyle(1);
-
-    QHBoxLayout *box = new QHBoxLayout;
-    box->addWidget(colorBox);
-    setLayout(box);
 }
 
 
-void adjustPalette :: setRvalue(int rV) {
+void colorDemo::paintEvent(QPaintEvent *) {  
+    QPainter painter(this);
+    QColor color(rValue, gValue, bValue);
+    QRectF rectangle(0, 0, 500, 20);
+
+    painter.setPen(Qt::NoPen);
+    painter.fillRect(rectangle, color);
+}
+
+
+void colorDemo :: setRvalue(int rV) {
     if(rValue != rV) {
         rValue = rV;
-        this->makePalette();
+        update();
     }
 }
 
 
-void adjustPalette :: setGvalue(int gV) {
+void colorDemo :: setGvalue(int gV) {
     if(gValue != gV) {
         gValue = gV;
-        this->makePalette();
+        update();
     }
 }
 
 
-void adjustPalette :: setBvalue(int bV) {
+void colorDemo :: setBvalue(int bV) {
     if(bValue != bV) {
         bValue = bV;
-        this->makePalette();
+        update();
     }
-}
-
-// Error is here!
-void adjustPalette :: makePalette() {
-    colorBox->setPalette(QPalette(QColor(rValue, gValue, bValue)));
 }

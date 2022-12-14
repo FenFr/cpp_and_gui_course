@@ -11,6 +11,7 @@
 
 
 #include <QApplication>
+#include <QPaintDevice>
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QPalette>
@@ -35,7 +36,7 @@ MyWidget::MyWidget(QWidget *parent)
     cSlider *gSlider = new cSlider("G");
     cSlider *bSlider = new cSlider("B");
 
-    adjustPalette *palette = new adjustPalette();
+    colorDemo *palette = new colorDemo();
 
     connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
 

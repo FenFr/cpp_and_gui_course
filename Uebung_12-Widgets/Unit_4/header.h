@@ -19,7 +19,6 @@
 class QPushButton;
 class QLCDNumber;
 class QSlider;
-class QLabel;
 
 
 class cSlider : public QWidget {
@@ -44,15 +43,17 @@ class cSlider : public QWidget {
 };
 
 
-class adjustPalette : public QWidget {
+class colorDemo : public QWidget {
     Q_OBJECT
 
     public:
-        adjustPalette(QWidget *parent = 0);
+        colorDemo(QWidget *parent = 0);
 
     private:
         int rValue, gValue, bValue;
-        QLabel *colorBox;
+
+    protected:
+        void paintEvent(QPaintEvent *event);
 
     signals:
 
@@ -62,7 +63,6 @@ class adjustPalette : public QWidget {
         void setBvalue(int bV);
 
     private slots:
-        void makePalette();
 };
 
 #endif
