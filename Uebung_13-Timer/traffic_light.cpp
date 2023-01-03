@@ -9,25 +9,25 @@
 // Description:   		Creates a traffic light and prints its cycles
 //////////////////////////////////////////////////////////////////////////////
 
-
+/*
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+*/
+
+#include <QBrush>
+#include <QPainter>
 
 #include "traffic_light.h"
 
 
-TL :: TL() {
+// TL /////
+
+TL :: TL(QWidget *parent)
+    : QWidget(parent) {
+
     this->phase = 1;
     change_light();
-    print_light ();
-}
-
-
-TL :: TL(int phase_in) {
-    this->phase = phase_in;        
-    change_light();
-    print_light ();
 }
 
 
@@ -36,36 +36,32 @@ void TL :: change_light() {
     switch(this->phase) {
         default :   this->phase = 1;
 
-        case  1 :   // this->light = "R _ _";
-                    check_for_changed_color(1, 0, 0);
+        case  1 :   check_changed_light(1, 0, 0);
                     break;
 
-        case  2 :   // this->light = "R Y _";
-                    check_for_changed_color(1, 1, 0);
+        case  2 :   check_changed_light(1, 1, 0);
                     break;
 
-        case  3 :   // this->light = "_ _ G";
-                    check_for_changed_color(0, 0, 1);
+        case  3 :   check_changed_light(0, 0, 1);
                     break;
 
-        case  4 :   // this->light = "_ Y _";
-                    check_for_changed_color(0, 1, 0);
+        case  4 :  check_changed_light(0, 1, 0);
                     break;
     }
 }
 
 
-void TL :: check_for_changed_color(int r, int g, int b) {
+void TL :: check_changed_light(int r, int y, int g) {
     if(color_state[0] != r) {
-        emit redChanged   (this->color_state[0] = r);
+        emit redChanged    (this->color_state[0] = r);
     }
 
-    if(color_state[1] != g) {
-        emit greenChanged (this->color_state[1] = g);
+    if(color_state[1] != y) {
+        emit yellowChanged (this->color_state[1] = y);
     }
 
-    if(color_state[2] != b) {
-        emit blueChanged  (this->color_state[2] = b);
+    if(color_state[2] != g) {
+        emit greenChanged  (this->color_state[2] = g);
     }        
 }
 
@@ -73,12 +69,35 @@ void TL :: check_for_changed_color(int r, int g, int b) {
 void TL :: iterate_light() {
     this->phase++;
     change_light();
-    // print_light ();
+}
+
+// TCirc /////
+
+TCirc :: TCirc(short int r, short int g, short int b, short int s, QWidget *Parent) {
+//    : QWidget(parent) {
+
+    this->rVal   = r;
+    this->gVal   = g;
+    this->bVal   = b;
+    this->status = s;
+
+};
+
+
+void TCirc :: paintEvent(QPaintEvent *) {  
+    QPainter circle(this);
+    QColor c_color (this->rVal, this->gVal, this->bVal);
+    QBrush c_brush ((status) ? c_color : Qt::white, Qt::SolidPattern);
+
+    circle.setPen(Qt::black);
+    circle.setBrush(c_brush);
+    circle.drawEllipse(0, 0, 30, 30);
 }
 
 
-/*
-void TL :: print_light() {
-    printf("Phase : %d\nLight : %s\n\n", this->phase, this->light);
+void TCirc :: active(int status) {
+    if(this->status != status) {
+        this->status = status;
+        update();
+    }
 }
-*/

@@ -15,27 +15,22 @@
 
 #include <QWidget> 
 
-class QPushButton;
-class QLCDNumber;
-class QSlider;
+class QColor;
 
 
 class TL : public QWidget {
     Q_OBJECT
 
+    public:
+        TL(QWidget *parent = 0);
+
     private:
         const char *light;
         short int phase;
-        short int color_state[3];   // [0] == red ; [1] == green ; [2] == blue
+        short int color_state[3];   // [0] == red ; [1] == yellow ; [2] == green
 
         void change_light();
-        void check_for_changed_color(int r, int g, int b);
-
-    public:
-        TL();
-        TL(int phase_in);
-
-        void print_light();
+        void check_changed_light(int r, int y, int g);
 
     public slots:
         void iterate_light();
@@ -43,10 +38,29 @@ class TL : public QWidget {
     private slots:
 
     signals:
-        void redChanged  (int rState);
-        void greenChanged(int gSate);
-        void blueChanged (int bSate);
+        void redChanged   (int rState);
+        void yellowChanged(int ySate);
+        void greenChanged (int gSate);
 };
 
+
+
+class TCirc : public QWidget {
+    Q_OBJECT
+
+    public:
+        TCirc(short int r, short int g, short int b, short int s, QWidget *Parent = 0);
+
+    private:
+        short int rVal, gVal, bVal, status;
+
+    protected:
+        void paintEvent(QPaintEvent *event);
+
+    public slots:
+        void active(int status);
+
+    signals:
+};
 
 #endif
