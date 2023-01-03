@@ -15,7 +15,6 @@
 
 #include <QWidget> 
 
-
 class QPushButton;
 class QLCDNumber;
 class QSlider;
